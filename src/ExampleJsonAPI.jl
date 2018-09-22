@@ -2,12 +2,12 @@ module ExampleJsonAPI
 export run
 using HTTP
 using Sockets
-import JSON
+using JSON
 
 function json_response(handler::Function)
     function jsonify(request)
         d, status = handler(request)
-        resp = HTTP.Response(status, JSON.json(d))
+        resp = HTTP.Response(status, json(d))
         HTTP.setheader(resp, "content-type" => "application/json")
         resp
     end
